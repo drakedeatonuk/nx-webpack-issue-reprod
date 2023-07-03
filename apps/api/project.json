@@ -29,15 +29,6 @@
       "defaultConfiguration": "loc"
     },
     "serve": {
-      "executor": "nx:run-commands",
-      "configurations": {
-        "loc": {
-          "command": "NODE_ENV=loc nx serve-api api --configuration loc"
-        }
-      },
-      "defaultConfiguration": "loc"
-    },
-    "serve-api": {
       "executor": "@nx/js:node",
       "configurations": {
         "loc": {
