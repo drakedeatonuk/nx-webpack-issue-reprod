@@ -1,0 +1,9 @@
+/node_modules
+!/node_modules/.prisma
+/dist
+!/dist/apps
+.angular
+.vscode
+*.example
+.storybook
+.git

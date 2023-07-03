@@ -1,0 +1,61 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "tsconfig": "apps/api/tsconfig.json",
+        "outputPath": "dist/apps/api",
+        "tsConfig": "apps/api/tsconfig.app.json",
+        "generatePackageJson": true,
+        "main": "apps/api/src/main.ts",
+        "externalDependencies": "all",
+        "webpackConfig": "apps/api/webpack.config.ts"
+      },
+      "configurations": {
+        "loc": {
+          "optimization": false,
+          "extractLicenses": false
+        }
+      },
+      "defaultConfiguration": "loc"
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "configurations": {
+        "loc": {
+          "command": "NODE_ENV=loc nx serve-api api --configuration loc"
+        }
+      },
+      "defaultConfiguration": "loc"
+    },
+    "serve-api": {
+      "executor": "@nx/js:node",
+      "configurations": {
+        "loc": {
+          "buildTarget": "api:build:loc"
+        }
+      },
+      "defaultConfiguration": "loc"
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/api/**/*.ts"
+        ]
+      }
+    }
+  }
+}
